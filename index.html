@@ -9,10 +9,21 @@
 <body>
     <h1>Currency conversion</h1>
     <input type="number">
-    <select name="ChangedCurrency" id="">
+    <select name="from-changed-currency" id="from-value">
         <option value="nothing">Select currency</option>
+        <option value="RUB">RUB</option>
+        <option value="EUR">EUR</option>
+        <option value="USD">USD</option>
     </select>
-    <button id="request-btn">request</button>
+    <select name="to-changed-currency" id="to-value">
+        <option value="nothing">Select currency</option>
+        <option value="RUB">RUB</option>
+        <option value="EUR">EUR</option>
+        <option value="USD">USD</option>
+    </select>
+    <button id="currencies-request-btn">Currencies request</button>
+    <button type="button" id="latest-request-btn">Latest request</button>
+    <button id="status-request-btn">Status request</button>
     <script src="script.js"></script>
 </body>
 </html>
