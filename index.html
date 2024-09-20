@@ -8,22 +8,26 @@
 </head>
 <body>
     <h1>Currency conversion</h1>
-    <input type="number">
+    <input type="number" id="value-count">
     <select name="from-changed-currency" id="from-value">
         <option value="nothing">Select currency</option>
         <option value="RUB">RUB</option>
         <option value="EUR">EUR</option>
         <option value="USD">USD</option>
     </select>
+
     <select name="to-changed-currency" id="to-value">
         <option value="nothing">Select currency</option>
         <option value="RUB">RUB</option>
         <option value="EUR">EUR</option>
         <option value="USD">USD</option>
     </select>
+
     <button id="currencies-request-btn">Currencies request</button>
     <button type="button" id="latest-request-btn">Latest request</button>
     <button id="status-request-btn">Status request</button>
+
+    <label id="result-label" for="result-currency"></label>
     <script src="script.js"></script>
 </body>
 </html>

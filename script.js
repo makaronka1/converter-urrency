@@ -3,20 +3,29 @@ let statusBtn = document.querySelector("#status-request-btn");
 let latestBtn = document.querySelector("#latest-request-btn");
 let fromSelector = document.querySelector("#from-value");
 let toSelector = document.querySelector("#to-value");
-
-var oReq = new XMLHttpRequest();
-
-oReq.addEventListener("load", function () { console.log(this.responseText); });
-
+let resultLabel = document.querySelector("#result-label");
+let valueCount = document.querySelector("#value-count");
 
 const statusRequest = () => {
-    oReq.open("GET", "https://api.freecurrencyapi.com/v1/status?apikey=fca_live_qqMcXgtYmpYcOU8pn6KYZGEOOYnvNN8LOdwMH9Dg");
-    oReq.send();
+    fetch("https://api.freecurrencyapi.com/v1/status?apikey=fca_live_qqMcXgtYmpYcOU8pn6KYZGEOOYnvNN8LOdwMH9Dg")
+    .then((response) => {
+       return response.json();
+    })
+    .then((data) => {
+        console.log(data);
+    })
+    .catch();
 }
 
 const currenciesRequest = () => {
-    oReq.open("GET", "https://api.freecurrencyapi.com/v1/currencies?apikey=fca_live_qqMcXgtYmpYcOU8pn6KYZGEOOYnvNN8LOdwMH9Dg&currencies=RUB%2CUSD&base_currency=RUB");
-    oReq.send();
+    fetch("https://api.freecurrencyapi.com/v1/currencies?apikey=fca_live_qqMcXgtYmpYcOU8pn6KYZGEOOYnvNN8LOdwMH9Dg&currencies=RUB%2CUSD&base_currency=RUB")
+    .then((response) => {
+       return response.json();
+    })
+    .then((data) => {
+        console.log(data);
+    })
+    .catch();
 }
 
 const latestRequest = (baseCurrency, currencies) => {
@@ -24,8 +33,15 @@ const latestRequest = (baseCurrency, currencies) => {
         alert("Select all currency");
         return;
     }
-    oReq.open("GET", `https://api.freecurrencyapi.com/v1/latest?apikey=fca_live_qqMcXgtYmpYcOU8pn6KYZGEOOYnvNN8LOdwMH9Dg&currencies=${currencies}&base_currency=${baseCurrency}`);
-    oReq.send();
+    fetch(`https://api.freecurrencyapi.com/v1/latest?apikey=fca_live_qqMcXgtYmpYcOU8pn6KYZGEOOYnvNN8LOdwMH9Dg&currencies=${currencies}&base_currency=${baseCurrency}`)
+    .then((respone) => {
+        return respone.json();
+    })
+    .then((data) => {
+        console.log(data);
+        resultLabel.innerHTML = `In ${valueCount.value} ${baseCurrency} ${(parseFloat(data["data"][currencies])* valueCount.value).toFixed(2)} ${currencies}`;
+    })
+    .catch();
 }
 currenciesBtn.addEventListener("click", currenciesRequest);
 statusBtn.addEventListener("click", statusRequest);
